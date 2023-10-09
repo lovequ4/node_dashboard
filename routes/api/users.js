@@ -67,4 +67,44 @@ router.post("/login",(req,res)=>{
         })
 })
 
+//    api/users
+router.get("",(req,res)=>{
+    User.find()
+        .select('name email identity')
+        .then(users=>{
+            if(!users){
+                return res.status(404).json({msg:"No users found"});
+            }
+            res.json(users);
+        })
+        .catch((err) => res.status(400).json(err)); 
+})
+
+
+
+// put api/users/edit
+router.put('/edit/:id', (req,res)=>{
+    const user = {};
+
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.email) user.email = req.body.email;
+    if (req.body.identity) user.identity = req.body.identity;
+   
+   User.findOneAndUpdate(
+        {_id:req.params.id},
+        {$set:user},
+        {new:true}
+    ).then(user => res.json(user))
+})
+
+// delete api/users/delete
+router.delete('/delete/:id', (req,res)=>{
+    User.findByIdAndRemove(req.params.id)
+        .then(user => 
+            res.json(user))
+        .catch(err =>{
+            res.status(404).json(err)
+        })
+})
+
 module.exports = router;
