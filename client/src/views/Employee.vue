@@ -158,6 +158,7 @@ export default {
         .then(response => {
             console.log('Data refreshed:', response.data);
             this.rows = response.data;
+            this.rows = response.data.map((row, index) => ({ ...row, index: index + 1 }));
         })
         .catch(error => {
             console.error('Error refreshing data:', error);
