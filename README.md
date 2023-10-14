@@ -1,8 +1,13 @@
 OS:wsl2 ubuntu22.04
+
 DB:mongoDB
+
 Tool:Postman
+
 Backend: node + express
+
 Frontend: vue3  +  quasar framework
+
 
 在網頁查看設備傳送數據小作品，iot_device.js 每5秒傳送假資料儲存到DB，以及簡易CRUD。
 
